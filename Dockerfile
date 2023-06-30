@@ -6,11 +6,11 @@ WORKDIR /app
 
 COPY requirements.txt .
 
-RUN pip3 install -t requirements.txt
+RUN pip install -r requirements.txt
 
-RUN python3 manage.py migrate
+COPY . .
 
-COPY . /app/
+RUN python manage.py migrate
 
 EXPOSE 8000
 
