@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div>
+    <div>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Save">
+            <input type="button" value="Cancel" onclick="location.href='{% url 'list' todo_list.id %}'">
+        </form>
+    </div>
+</div>
+{% endblock content %}

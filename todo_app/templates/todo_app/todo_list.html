@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div>
+    <div>
+        <div>
+            <h3>Edit list:</h3>
+            <h5>{{ todo_list.title | upper }}</h5>
+        </div>
+        <ul>
+            {% for todo in object_list %}
+            <li>
+                <div>
+
+                    {% if not todo.done %}
+
+                    <div style="display:inline-block;" role="button" onclick="location.href='{% url 'item-update' todo_list.id todo.id %}'">
+                        {{ todo.title }}
+                        (Due {{ todo.due_date | date:"l, F j" }})
+                    </div>
+                    
+                    <form method='post' style="display:inline-block;">
+                        {% csrf_token %}
+                        <input style="display: none;" value="{{ todo.id }}" name="done_id"></input>
+                        <button type="submit">Done</button>
+                    </form>
+
+                    {% else %}
+
+                    <del role="button" onclick="location.href='{% url 'item-update' todo_list.id todo.id %}'">
+                        {{ todo.title }}
+                        (Due {{ todo.due_date | date:"l, F j" }})
+                    </del>
+                    <button style="display:inline-block;" onclick="location.href='{% url 'item-delete' todo_list.id todo.id %}'">Delete</button>
+
+                    {% endif %}
+
+                </div>
+            </li>
+            {% empty %}
+            <p>There are no to-do items in this list.</p>
+            {% endfor %}
+        </ul>
+        <p>
+            <input type="button" value="Add new item" onclick="location.href='{% url 'item-add' todo_list.id %}'" />
+            <input type="button" value="Delete this list" onclick="location.href='{% url 'list-delete' todo_list.id %}'" />
+        </p>
+    </div>
+</div>
+{% endblock content %}
+
+{% block script %}
+<script>
+    window.onload = function() {
+        console.log(todo.done)
+    }
+</script>
+{% endblock script %}
