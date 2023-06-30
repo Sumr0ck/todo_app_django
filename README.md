@@ -8,7 +8,13 @@
 
 ## Запуск в своем окружении
 
+переходим в папку с проектом `cd todo_app_django`
+
 создаем окружение(если необходимо) `python -m venv venv`
+
+активируем его `. venv/bin/activate`
+
+усанавливаем зависимости `pip install -r requirements.txt`
 
 проводим миграции `python manage.py migrate`
 
